@@ -1,0 +1,10 @@
+.idea
+upload
+*.exe
+*.db
+*.pyc
+dist
+build
+*.spec
+.DS_Store
+*.ini
