@@ -2,7 +2,7 @@ import os
 import sys
 
 from PyQt5.QtCore import pyqtSlot
-from PyQt5.QtGui import QIcon
+from PyQt5.QtGui import QIcon, QKeyEvent
 from PyQt5.QtWidgets import QApplication, QMainWindow, QSystemTrayIcon, QMenu
 
 from config import Config
@@ -41,7 +41,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         else:
             self.config['restInterval'] = '60'
         self.restSpinBox.textChanged.connect(lambda v: self.update_config("restInterval", v))
-        self.remind_methods = ['消息提醒', '弹窗提醒', '全屏覆盖']
+        self.remind_methods = ['消息提醒', '弹窗提醒', '全屏覆盖', '显示桌面']
         if 'remindMethod' in self.config:
             remind_method = self.config['remindMethod']
             if remind_method in self.remind_methods:
@@ -51,7 +51,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.methodComboBox.setCurrentIndex(idx)
         else:
             self.config['remindMethod'] = '消息提醒'
-        self.methodComboBox.currentIndexChanged.connect(lambda v: self.update_config("method", self.remind_methods[v]))
+        self.methodComboBox.currentIndexChanged.connect(lambda v: self.update_config("remindMethod", self.remind_methods[v]))
 
         if 'microblogServer' in self.config:
             self.microblogServerLineEdit.setText(self.config['microblogServer'])

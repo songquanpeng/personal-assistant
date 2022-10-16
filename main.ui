@@ -150,6 +150,11 @@
               <string>全屏覆盖</string>
              </property>
             </item>
+            <item>
+             <property name="text">
+              <string>显示桌面</string>
+             </property>
+            </item>
            </widget>
           </item>
           <item>

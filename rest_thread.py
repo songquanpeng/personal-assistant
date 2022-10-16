@@ -2,6 +2,8 @@ import math
 import time
 from threading import Thread, Event
 
+import pyautogui
+
 
 class RestThread(Thread):
     def __init__(self, main):
@@ -18,9 +20,13 @@ class RestThread(Thread):
         if self.method == "消息提醒":
             self.main.tray.showMessage("个人助理", message)
         elif self.method == "弹窗提醒":
+            # TODO: 弹窗提醒
             pass
         elif self.method == "全屏覆盖":
+            # TODO: 全屏覆盖
             pass
+        elif self.method == "显示桌面":
+            pyautogui.hotkey('win', 'd')
 
     def run(self):
         while not self.should_stop():
