@@ -14,16 +14,15 @@
   </a>
 </p>
 
-可在 [Release 页面](https://github.com/songquanpeng/gofile-lancher/releases/latest)下载最新版本（Windows，macOS，Linux）。
+可在 [Release 页面](https://github.com/songquanpeng/personal-assistant/releases)下载最新版本（Windows，macOS，Linux）。
 
 ## 功能
-1. 一键启动 Go File。
-2. 配置自动保存。
-3. 自动下载 & 一键更新 Go File。
-4. 关闭时自动关闭打开的 Go File，用完即走。
+1. 休息提醒，包含多种提醒方式。
+2. 定时任务，定时执行各种命令。
+3. 周期待办，自动添加待办事项。
 
 ## 截图展示
-TODO
+![demo](demo.png)
 
 ## 使用方法
 ### Windows 用户  
