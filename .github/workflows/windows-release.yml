@@ -20,11 +20,11 @@ jobs:
       - name: Build
         run: |
           pip install -r requirements.txt
-          pyinstaller --noconsole -F ./main.py --icon icon.png -n gofile-launcher.exe
+          pyinstaller --noconsole -F ./main.py --icon icon.png -n personal-assistant.exe
       - name: Release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          files: dist/gofile-launcher.exe
+          files: dist/personal-assistant.exe
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

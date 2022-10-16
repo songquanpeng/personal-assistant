@@ -13,7 +13,7 @@ import resource
 
 filename = "go-file.exe"
 exec_filename = filename
-config_file = "gofile-launcher.ini"
+config_file = "personal-assistant.ini"
 is_windows = os.name == "nt"
 use_shell = is_windows
 if sys.platform == 'darwin':
@@ -76,7 +76,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.aboutMsgBox.setIcon(QMessageBox.Information)
         self.aboutMsgBox.setWindowTitle("关于")
         self.aboutMsgBox.setText(
-            f"Gofile Launcher 由 JustSong 构建，<a href='https://github.com/songquanpeng/gofile-launcher'>源代码</a>遵循 MIT 协议")
+            f"Gofile Launcher 由 JustSong 构建，<a href='https://github.com/songquanpeng/personal-assistant'>源代码</a>遵循 MIT 协议")
         self.NotFoundMsgBox = QMessageBox()
         self.NotFoundMsgBox.setFont(self.font())
         self.NotFoundMsgBox.setWindowIcon(QIcon(":/icon.png"))
