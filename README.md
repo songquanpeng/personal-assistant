@@ -40,6 +40,6 @@ TODO
 ```bash
 pip install -r requirements.txt
 pyuic5 -o ui.py main.ui
-pyrcc5 -o resource.py resource.qrc 
+pyrcc5 -o resource_rc.py resource.qrc 
 pyinstaller --noconsole -F ./main.py --icon icon.png -n personal-assistant.exe
 ```
