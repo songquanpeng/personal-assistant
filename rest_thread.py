@@ -34,6 +34,8 @@ class RestThread(Thread):
             if self.working:
                 sleep_seconds *= 60
             time.sleep(sleep_seconds)
+            if self.should_stop():
+                return
             self.count += 1
             if self.working:
                 self.main.workProgressBar.setValue(math.ceil(100 * self.count / self.work_interval))

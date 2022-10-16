@@ -94,7 +94,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         else:
             self.restStartBtn.setText("开始")
             self.rest_thread.stop()
-            self.rest_thread.join()
+            # self.rest_thread.join()
             self.rest_thread = None
             self.statusbar.showMessage("休息提醒已终止")
 
