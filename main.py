@@ -1,9 +1,9 @@
 import os
 import sys
 
-from PyQt5.QtCore import pyqtSlot
-from PyQt5.QtGui import QIcon, QKeyEvent
-from PyQt5.QtWidgets import QApplication, QMainWindow, QSystemTrayIcon, QMenu
+from PyQt5.QtCore import pyqtSlot, Qt, pyqtSignal
+from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QApplication, QMainWindow, QSystemTrayIcon, QMenu, QMessageBox
 
 from config import Config
 from rest_thread import RestThread
@@ -15,6 +15,8 @@ use_shell = is_windows
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):
+    notify_message_box_signal = pyqtSignal(str)
+
     def __init__(self):
         super().__init__()
         self.setupUi(self)
@@ -51,8 +53,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.methodComboBox.setCurrentIndex(idx)
         else:
             self.config['remindMethod'] = '消息提醒'
-        self.methodComboBox.currentIndexChanged.connect(lambda v: self.update_config("remindMethod", self.remind_methods[v]))
-
+        self.methodComboBox.currentIndexChanged.connect(
+            lambda v: self.update_config("remindMethod", self.remind_methods[v]))
         if 'microblogServer' in self.config:
             self.microblogServerLineEdit.setText(self.config['microblogServer'])
         self.microblogServerLineEdit.textChanged.connect(lambda v: self.update_config("microblogServer", v))
@@ -70,6 +72,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if 'todo' in self.config:
             self.todoTextEdit.setPlainText(self.config['todo'])
 
+        self.notify_message_box = QMessageBox()
+        self.notify_message_box.setFont(self.centralwidget.font())
+        self.notify_message_box.setWindowIcon(QIcon(":/icon.png"))
+        self.notify_message_box.setIcon(QMessageBox.Information)
+        self.notify_message_box.setWindowTitle("个人助理")
+        self.notify_message_box.resize(520, 230)
+        self.notify_message_box.setWindowFlags(Qt.WindowStaysOnTopHint)
+        self.notify_message_box_signal.connect(self.show_notify_message_box)
         # threads
         self.rest_thread = None
 
@@ -83,6 +93,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def update_config(self, key, value):
         self.config[key] = value
+
+    def show_notify_message_box(self, msg):
+        self.notify_message_box.setText(msg)
+        self.notify_message_box.show()
 
     @pyqtSlot()
     def on_restStartBtn_clicked(self):

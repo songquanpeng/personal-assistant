@@ -16,12 +16,11 @@ class RestThread(Thread):
         self._stop_event = Event()
         self.method = self.main.config['remindMethod']
 
-    def show_message(self, message):
+    def remind_user(self, message):
         if self.method == "消息提醒":
             self.main.tray.showMessage("个人助理", message)
         elif self.method == "弹窗提醒":
-            # TODO: 弹窗提醒
-            pass
+            self.main.notify_message_box_signal.emit(message)
         elif self.method == "全屏覆盖":
             # TODO: 全屏覆盖
             pass
@@ -42,7 +41,7 @@ class RestThread(Thread):
                 if self.count == self.work_interval:
                     self.working = False
                     self.count = 0
-                    self.show_message("开始休息！")
+                    self.remind_user("开始休息！")
             else:
                 self.main.restProgressBar.setValue(math.ceil(100 * self.count / self.rest_interval))
                 if self.count == self.rest_interval:
@@ -50,7 +49,7 @@ class RestThread(Thread):
                     self.count = 0
                     self.main.workProgressBar.setValue(0)
                     self.main.restProgressBar.setValue(0)
-                    self.show_message("开始工作！")
+                    self.remind_user("开始工作！")
         self.main.workProgressBar.setValue(0)
         self.main.restProgressBar.setValue(0)
 
