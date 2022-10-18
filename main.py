@@ -109,6 +109,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if self.rest_thread is None:
             self.restStartBtn.setText("暂停")
             self.rest_thread = RestThread(self, self.debug)
+            self.rest_thread.setDaemon(True)
             self.rest_thread.start()
             self.statusbar.showMessage("休息提醒已启动")
         else:
