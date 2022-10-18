@@ -19,6 +19,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def __init__(self):
         super().__init__()
+        self.debug = os.getenv('PA_DEBUG') == "true"
         self.setupUi(self)
         self.setWindowIcon(QIcon(":/icon.png"))
         self.tray = QSystemTrayIcon()
@@ -31,7 +32,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         quit_action = self.menu.addAction("退出")
         quit_action.triggered.connect(self.quit)
         self.tray.setContextMenu(self.menu)
-        self.gofile = None
+        self.restStopBtn.setDisabled(True)
         self.config = Config(config_file)
         if 'workInterval' in self.config:
             self.workSpinBox.setValue(int(self.config['workInterval'].split(' ')[0]))
@@ -100,17 +101,33 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     @pyqtSlot()
     def on_restStartBtn_clicked(self):
+        self.restStopBtn.setEnabled(True)
         if self.rest_thread is None:
-            self.restStartBtn.setText("终止")
-            self.rest_thread = RestThread(self)
+            self.restStartBtn.setText("暂停")
+            self.rest_thread = RestThread(self, self.debug)
             self.rest_thread.start()
             self.statusbar.showMessage("休息提醒已启动")
         else:
-            self.restStartBtn.setText("开始")
+            if self.rest_thread.should_pause():
+                self.restStartBtn.setText("暂停")
+                self.rest_thread.resume()
+                self.statusbar.showMessage("休息提醒已恢复")
+            else:
+                self.restStartBtn.setText("继续")
+                self.rest_thread.pause()
+                self.statusbar.showMessage("休息提醒已暂停")
+
+    @pyqtSlot()
+    def on_restStopBtn_clicked(self):
+        if self.rest_thread is not None:
+            self.restStopBtn.setDisabled(True)
             self.rest_thread.stop()
             # self.rest_thread.join()
             self.rest_thread = None
+            self.workProgressBar.setValue(0)
+            self.restProgressBar.setValue(0)
             self.statusbar.showMessage("休息提醒已终止")
+            self.restStartBtn.setText("开始")
 
     @pyqtSlot()
     def on_scheduleSaveBtn_clicked(self):

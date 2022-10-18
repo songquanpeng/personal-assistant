@@ -67,68 +67,6 @@
         <string>休息提醒</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout">
-        <item row="1" column="0">
-         <layout class="QHBoxLayout" name="horizontalLayout_2">
-          <item>
-           <widget class="QLabel" name="label_3">
-            <property name="text">
-             <string>提醒方式：</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QComboBox" name="methodComboBox">
-            <item>
-             <property name="text">
-              <string>消息提醒</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>弹窗提醒</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>全屏覆盖</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>显示桌面</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-          <item>
-           <spacer name="horizontalSpacer_2">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>168</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-         </layout>
-        </item>
-        <item row="3" column="0">
-         <widget class="QLabel" name="label_4">
-          <property name="text">
-           <string>工作进度条：</string>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="0">
-         <widget class="QLabel" name="label_5">
-          <property name="text">
-           <string>休息进度条：</string>
-          </property>
-         </widget>
-        </item>
         <item row="0" column="0">
          <layout class="QHBoxLayout" name="horizontalLayout">
           <item>
@@ -192,8 +130,84 @@
           </item>
          </layout>
         </item>
+        <item row="1" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <widget class="QLabel" name="label_3">
+            <property name="text">
+             <string>提醒方式：</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="methodComboBox">
+            <item>
+             <property name="text">
+              <string>消息提醒</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>弹窗提醒</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>全屏覆盖</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>显示桌面</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>168</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item row="2" column="0">
+         <widget class="Line" name="line">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="label_4">
+          <property name="text">
+           <string>工作进度条：</string>
+          </property>
+         </widget>
+        </item>
         <item row="4" column="0">
          <widget class="QProgressBar" name="workProgressBar">
+          <property name="value">
+           <number>0</number>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="0">
+         <widget class="QLabel" name="label_5">
+          <property name="text">
+           <string>休息进度条：</string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="0">
+         <widget class="QProgressBar" name="restProgressBar">
           <property name="value">
            <number>0</number>
           </property>
@@ -215,6 +229,13 @@
            </spacer>
           </item>
           <item>
+           <widget class="QPushButton" name="restStopBtn">
+            <property name="text">
+             <string>终止</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QPushButton" name="restStartBtn">
             <property name="text">
              <string>开始</string>
@@ -222,20 +243,6 @@
            </widget>
           </item>
          </layout>
-        </item>
-        <item row="2" column="0">
-         <widget class="Line" name="line">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="0">
-         <widget class="QProgressBar" name="restProgressBar">
-          <property name="value">
-           <number>0</number>
-          </property>
-         </widget>
         </item>
        </layout>
       </widget>
