@@ -47,21 +47,19 @@ class RestThread(Thread):
                 time.sleep(1)
             self.count += 1
             if self.working:
-                self.main.workProgressBar.setValue(math.ceil(100 * self.count / self.work_interval))
+                self.main.update_work_progress_signal.emit(math.ceil(100 * self.count / self.work_interval))
                 if self.count == self.work_interval:
                     self.working = False
                     self.count = 0
                     self.remind_user("开始休息！")
             else:
-                self.main.restProgressBar.setValue(math.ceil(100 * self.count / self.rest_interval))
+                self.main.update_rest_progress_signal.emit(math.ceil(100 * self.count / self.rest_interval))
                 if self.count == self.rest_interval:
                     self.working = True
                     self.count = 0
-                    self.main.workProgressBar.setValue(0)
-                    self.main.restProgressBar.setValue(0)
+                    self.main.update_work_progress_signal.emit(0)
+                    self.main.update_rest_progress_signal.emit(0)
                     self.remind_user("开始工作！")
-        self.main.workProgressBar.setValue(0)
-        self.main.restProgressBar.setValue(0)
 
     def stop(self):
         self._stop_event.set()

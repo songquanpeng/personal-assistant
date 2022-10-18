@@ -16,6 +16,8 @@ use_shell = is_windows
 
 class MainWindow(QMainWindow, Ui_MainWindow):
     notify_message_box_signal = pyqtSignal(str)
+    update_work_progress_signal = pyqtSignal(int)
+    update_rest_progress_signal = pyqtSignal(int)
 
     def __init__(self):
         super().__init__()
@@ -81,6 +83,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.notify_message_box.resize(520, 230)
         self.notify_message_box.setWindowFlags(Qt.WindowStaysOnTopHint)
         self.notify_message_box_signal.connect(self.show_notify_message_box)
+        self.update_work_progress_signal.connect(self.workProgressBar.setValue)
+        self.update_rest_progress_signal.connect(self.restProgressBar.setValue)
         # threads
         self.rest_thread = None
 
