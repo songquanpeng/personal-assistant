@@ -18,6 +18,8 @@ class RestThread(Thread):
         self._stop_event = Event()
         self._pause_event = Event()
         self.method = self.main.config['remindMethod']
+        self.remind_work_text = self.main.config['remindWorkText']
+        self.remind_rest_text = self.main.config['remindRestText']
         self.seconds_per_minute = 60
         if debug:
             self.seconds_per_minute = 1
@@ -51,7 +53,7 @@ class RestThread(Thread):
                 if self.count == self.work_interval:
                     self.working = False
                     self.count = 0
-                    self.remind_user("开始休息！")
+                    self.remind_user(self.remind_rest_text)
             else:
                 self.main.update_rest_progress_signal.emit(math.ceil(100 * self.count / self.rest_interval))
                 if self.count == self.rest_interval:
@@ -59,7 +61,7 @@ class RestThread(Thread):
                     self.count = 0
                     self.main.update_work_progress_signal.emit(0)
                     self.main.update_rest_progress_signal.emit(0)
-                    self.remind_user("开始工作！")
+                    self.remind_user(self.remind_work_text)
 
     def stop(self):
         self._stop_event.set()

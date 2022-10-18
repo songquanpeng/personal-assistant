@@ -74,6 +74,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.scheduleTextEdit.setPlainText(self.config['schedule'])
         if 'todo' in self.config:
             self.todoTextEdit.setPlainText(self.config['todo'])
+        if 'remindWorkText' in self.config:
+            self.workTextLineEdit.setText(self.config['remindWorkText'])
+        self.workTextLineEdit.textChanged.connect(lambda v: self.update_config("remindWorkText", v))
+        if 'remindRestText' in self.config:
+            self.restTextLineEdit.setText(self.config['remindRestText'])
+        self.restTextLineEdit.textChanged.connect(lambda v: self.update_config("remindRestText", v))
 
         self.notify_message_box = QMessageBox()
         self.notify_message_box.setFont(self.centralwidget.font())
