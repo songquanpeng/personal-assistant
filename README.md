@@ -1,5 +1,5 @@
-﻿# Personal Assistant
-> A personal assistant app that makes your life easier.
+﻿# 个人助理应用
+> 让生活简单一点的个人助理应用
 
 
 <p>

@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Personal Assistant</string>
+   <string>个人助理</string>
   </property>
   <property name="styleSheet">
    <string notr="true">font: 11pt &quot;Microsoft YaHei UI&quot;;</string>
@@ -282,8 +282,7 @@
 font-family: &quot;Consolas&quot;, &quot;Microsoft YaHei&quot;;</string>
           </property>
           <property name="plainText">
-           <string># 语法与 crontab 保持一致
-</string>
+           <string/>
           </property>
          </widget>
         </item>

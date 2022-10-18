@@ -227,7 +227,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "Personal Assistant"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "个人助理"))
         self.label.setText(_translate("MainWindow", "休息间隔："))
         self.workSpinBox.setSuffix(_translate("MainWindow", " 分钟"))
         self.label_2.setText(_translate("MainWindow", "休息时长："))
