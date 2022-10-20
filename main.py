@@ -27,6 +27,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.tray = QSystemTrayIcon()
         self.tray.setIcon(QIcon(":/icon.png"))
         self.tray.setVisible(True)
+
+        def activate_tray(reason):
+            if reason == QSystemTrayIcon.Trigger:
+                self.show()
+
+        self.tray.activated.connect(activate_tray)
         self.menu = QMenu()
         self.menu.setFont(self.centralwidget.font())
         show_action = self.menu.addAction("设置")
