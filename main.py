@@ -12,6 +12,7 @@ from ui import Ui_MainWindow
 config_file = "personal-assistant.ini"
 is_windows = os.name == "nt"
 use_shell = is_windows
+hide_when_start = False
 
 RUN_PATH = "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run"
 
@@ -91,6 +92,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if 'bootStart' in self.config:
             self.bootStartCheckBox.setCheckState(int(self.config['bootStart']))
         self.bootStartCheckBox.stateChanged.connect(lambda v: self.update_config("bootStart", str(v)))
+        if 'hideStart' in self.config:
+            self.hideStartCheckBox.setCheckState(int(self.config['hideStart']))
+            if self.config['hideStart'] == '2':
+                global hide_when_start
+                hide_when_start = True
+        self.hideStartCheckBox.stateChanged.connect(lambda v: self.update_config("hideStart", str(v)))
         if is_windows:
             self.settings = QSettings(RUN_PATH, QSettings.NativeFormat)
 
@@ -177,5 +184,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     Dialog = MainWindow()
-    Dialog.show()
+    if not hide_when_start:
+        Dialog.show()
     sys.exit(app.exec_())

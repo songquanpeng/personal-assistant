@@ -413,6 +413,24 @@ font-family: &quot;Consolas&quot;, &quot;Microsoft YaHei&quot;;</string>
                </widget>
               </item>
               <item>
+               <widget class="QCheckBox" name="hideStartCheckBox">
+                <property name="text">
+                 <string>启动时最小化到托盘</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="1" column="0" colspan="2">
+             <layout class="QHBoxLayout" name="horizontalLayout_7">
+              <item>
+               <widget class="QPushButton" name="updateBtn">
+                <property name="text">
+                 <string>检查更新</string>
+                </property>
+               </widget>
+              </item>
+              <item>
                <spacer name="horizontalSpacer_5">
                 <property name="orientation">
                  <enum>Qt::Horizontal</enum>
@@ -425,16 +443,9 @@ font-family: &quot;Consolas&quot;, &quot;Microsoft YaHei&quot;;</string>
                 </property>
                </spacer>
               </item>
-              <item>
-               <widget class="QPushButton" name="updateBtn">
-                <property name="text">
-                 <string>检查更新</string>
-                </property>
-               </widget>
-              </item>
              </layout>
             </item>
-            <item row="1" column="0">
+            <item row="2" column="1">
              <spacer name="verticalSpacer">
               <property name="orientation">
                <enum>Qt::Vertical</enum>
