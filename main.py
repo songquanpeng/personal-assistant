@@ -1,7 +1,7 @@
 import os
 import sys
 
-from PyQt5.QtCore import pyqtSlot, Qt, pyqtSignal
+from PyQt5.QtCore import pyqtSlot, Qt, pyqtSignal, QSettings
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QApplication, QMainWindow, QSystemTrayIcon, QMenu, QMessageBox
 
@@ -12,6 +12,8 @@ from ui import Ui_MainWindow
 config_file = "personal-assistant.ini"
 is_windows = os.name == "nt"
 use_shell = is_windows
+
+RUN_PATH = "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run"
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):
@@ -86,6 +88,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if 'remindRestText' in self.config:
             self.restTextLineEdit.setText(self.config['remindRestText'])
         self.restTextLineEdit.textChanged.connect(lambda v: self.update_config("remindRestText", v))
+        if 'bootStart' in self.config:
+            self.bootStartCheckBox.setCheckState(int(self.config['bootStart']))
+        self.bootStartCheckBox.stateChanged.connect(lambda v: self.update_config("bootStart", str(v)))
+        if is_windows:
+            self.settings = QSettings(RUN_PATH, QSettings.NativeFormat)
 
         self.notify_message_box = QMessageBox()
         self.notify_message_box.setFont(self.centralwidget.font())
@@ -110,6 +117,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def update_config(self, key, value):
         self.config[key] = value
+        if key == "bootStart":
+            if is_windows:
+                if value == '2':
+                    self.settings.setValue("PersonalAssistant", sys.argv[0])
+                else:
+                    self.settings.remove("PersonalAssistant")
+            else:
+                self.statusbar.showMessage("开机启动选项仅支持 Windows 系统")
 
     def show_notify_message_box(self, msg):
         self.notify_message_box.setText(msg)
