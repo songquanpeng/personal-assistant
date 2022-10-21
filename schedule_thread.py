@@ -36,15 +36,19 @@ class Task:
         if day == '*':
             self.days = list(range(7))
         else:
-            self.days = [int(day) - 1]
+            self.days = list(map(int, day.split(",")))
+            self.days = [x - 1 for x in self.days]
+            self.days.sort()
         if hour == '*':
             self.hours = list(range(24))
         else:
-            self.hours = [int(hour)]
+            self.hours = list(map(int, hour.split(",")))
+            self.hours.sort()
         if minute == '*':
             self.minutes = list(range(60))
         else:
-            self.minutes = [int(minute)]
+            self.minutes = list(map(int, minute.split(",")))
+            self.minutes.sort()
 
         self.next_minutes = self.get_next_minutes()
 

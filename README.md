@@ -22,9 +22,10 @@
    1. 内置命令 `@tray` 可用于定时发送系统消息。
    2. 内置命令 `@msg` 可用于定时通过 [Message Pusher](https://github.com/songquanpeng/message-pusher) 发送消息（需要在`其他设置`页面配置好 Message Pusher 的服务地址和 token）。
    3. 语法：`weekday hour minute command`，例如
-      1. `* 11 30 @msg 订外卖`：每天 11:30 提醒订外卖，
-      2. `4 8 0 @msg 订球场`：每周四 08:00 提醒订球场，
-      3. `* 22 0 python ./backup.py`：每天 22:00 执行备份脚本。
+      1. `* 11 30 @msg 订外卖`：每天 11:30 提醒订外卖；
+      2. `4 8 0 @msg 订球场`：每周四 08:00 提醒订球场；
+      3. `* 22 0 python ./backup.py`：每天 22:00 执行备份脚本；
+      4. `* 9,13,17 0 @msg 记得滴眼药水~`：每天三个时间点提醒滴眼药水；
 3. 周期待办，自动添加待办事项。
 
 ## 截图展示
