@@ -102,6 +102,8 @@ class Task:
 
 
 def parse_tasks(cron: str, main=None):
+    if not cron:
+        return []
     task_strs = cron.split('\n')
     tasks = []
     for task in task_strs:
@@ -129,6 +131,8 @@ class ScheduleThread(Thread):
                 print(t.get_next_time(), " ", t.get_next_minutes())
 
     def run(self):
+        if len(self.tasks) == 0:
+            return
         while not self.should_stop():
             min_next_minutes = 24 * 60
             for task in self.tasks:
