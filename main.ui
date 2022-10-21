@@ -282,7 +282,8 @@
 font-family: &quot;Consolas&quot;, &quot;Microsoft YaHei&quot;;</string>
           </property>
           <property name="plainText">
-           <string/>
+           <string># 语法：day hour minute command
+</string>
           </property>
          </widget>
         </item>

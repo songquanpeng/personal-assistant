@@ -7,6 +7,7 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QSystemTrayIcon, QMenu, Q
 
 from config import Config
 from rest_thread import RestThread
+from schedule_thread import ScheduleThread
 from ui import Ui_MainWindow
 
 config_file = "personal-assistant.ini"
@@ -113,6 +114,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.update_rest_progress_signal.connect(self.restProgressBar.setValue)
         # threads
         self.rest_thread = None
+        self.schedule_thread = ScheduleThread(self, self.debug)
+        self.schedule_thread.setDaemon(True)
+        self.schedule_thread.start()
 
     def closeEvent(self, event):
         self.hide()
@@ -173,6 +177,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         value = self.scheduleTextEdit.toPlainText()
         self.config['schedule'] = value
         self.statusbar.showMessage("配置已保存")
+        self.schedule_thread.stop()
+        self.schedule_thread = ScheduleThread(self, self.debug)
+        self.schedule_thread.setDaemon(True)
+        self.schedule_thread.start()
 
     @pyqtSlot()
     def on_todoSaveBtn_clicked(self):

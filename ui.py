@@ -132,7 +132,6 @@ class Ui_MainWindow(object):
         self.scheduleTextEdit.setFont(font)
         self.scheduleTextEdit.setStyleSheet("font-size: 11pt;\n"
 "font-family: \"Consolas\", \"Microsoft YaHei\";")
-        self.scheduleTextEdit.setPlainText("")
         self.scheduleTextEdit.setObjectName("scheduleTextEdit")
         self.gridLayout_3.addWidget(self.scheduleTextEdit, 0, 0, 1, 1)
         self.horizontalLayout_4 = QtWidgets.QHBoxLayout()
@@ -305,6 +304,8 @@ class Ui_MainWindow(object):
         self.restStopBtn.setText(_translate("MainWindow", "终止"))
         self.restStartBtn.setText(_translate("MainWindow", "开始"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.restTab), _translate("MainWindow", "休息提醒"))
+        self.scheduleTextEdit.setPlainText(_translate("MainWindow", "# 语法：day hour minute command\n"
+""))
         self.scheduleSaveBtn.setText(_translate("MainWindow", "保存"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.scheduleTab), _translate("MainWindow", "定时任务"))
         self.todoTextEdit.setPlainText(_translate("MainWindow", "# 语法：* TODO 内容\n"
