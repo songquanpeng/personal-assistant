@@ -87,9 +87,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.todoTextEdit.setPlainText(self.config['todo'])
         if 'remindWorkText' in self.config:
             self.workTextLineEdit.setText(self.config['remindWorkText'])
+        else:
+            self.config['remindWorkText'] = self.workTextLineEdit.text()
         self.workTextLineEdit.textChanged.connect(lambda v: self.update_config("remindWorkText", v))
         if 'remindRestText' in self.config:
             self.restTextLineEdit.setText(self.config['remindRestText'])
+        else:
+            self.config['remindRestText'] = self.restTextLineEdit.text()
         self.restTextLineEdit.textChanged.connect(lambda v: self.update_config("remindRestText", v))
         if 'bootStart' in self.config:
             self.bootStartCheckBox.setCheckState(int(self.config['bootStart']))
