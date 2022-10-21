@@ -26,7 +26,7 @@ class RestThread(Thread):
 
     def remind_user(self, message):
         if self.method == "消息提醒":
-            self.main.tray.showMessage("个人助理", message)
+            self.main.tray_message_signal.emit("个人助理", message)
         elif self.method == "弹窗提醒":
             self.main.notify_message_box_signal.emit(message)
         elif self.method == "全屏覆盖":
