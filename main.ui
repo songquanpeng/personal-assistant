@@ -580,7 +580,7 @@ font-family: &quot;Consolas&quot;, &quot;Microsoft YaHei&quot;;</string>
                </widget>
               </item>
               <item>
-               <widget class="QLineEdit" name="messageServerLineEdit">
+               <widget class="QLineEdit" name="messagePusherURLLineEdit">
                 <property name="text">
                  <string/>
                 </property>
@@ -601,7 +601,7 @@ font-family: &quot;Consolas&quot;, &quot;Microsoft YaHei&quot;;</string>
                </widget>
               </item>
               <item>
-               <widget class="QLineEdit" name="messageTokenLineEdit">
+               <widget class="QLineEdit" name="messagePusherTokenLineEdit">
                 <property name="text">
                  <string/>
                 </property>

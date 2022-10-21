@@ -1,6 +1,7 @@
 import os
 import subprocess
 import time
+import requests
 from datetime import datetime, timedelta
 from threading import Thread, Event
 
@@ -25,12 +26,13 @@ def binary_search(arr, target):
 
 
 class Task:
-    def __init__(self, items):
+    def __init__(self, items, main=None):
+        self.items = items
         day = items[0]
         hour = items[1]
         minute = items[2]
-
         self.command = ' '.join(items[3:])
+        self.main = main
         if day == '*':
             self.days = list(range(7))
         else:
@@ -45,6 +47,12 @@ class Task:
             self.minutes = [int(minute)]
 
         self.next_minutes = self.get_next_minutes()
+
+        self.message_pusher_url = None
+        self.message_pusher_token = None
+        if self.main:
+            self.message_pusher_url = self.main.config["messagePusherURL"]
+            self.message_pusher_token = self.main.config["messagePusherToken"]
 
     def get_next_time(self):
         now = datetime.now()
@@ -82,14 +90,18 @@ class Task:
         return delta.days * 24 * 60 + delta.seconds // 60
 
     def execute(self):
-        if self.command[0] == '@msg':
-            print(' '.join(self.command[1:]))
+        if self.items[3] == '@tray':
+            if self.main:
+                self.main.tray_message_signal.emit("个人助理", " ".join(self.items[4:]))
+        elif self.items[3] == '@msg':
+            if self.message_pusher_url:
+                requests.get(f"{self.message_pusher_url}/?title={'个人助理'}&description={' '.join(self.items[4:])}&token={self.message_pusher_token}", verify=False)
         else:
             subprocess.Popen(self.command.split(' '), shell=use_shell, cwd="./")
         print(f'[{datetime.now()}]: command \"{self.command}\" executed')
 
 
-def parse_tasks(cron: str):
+def parse_tasks(cron: str, main=None):
     task_strs = cron.split('\n')
     tasks = []
     for task in task_strs:
@@ -98,7 +110,7 @@ def parse_tasks(cron: str):
         items = task.split(' ')
         if len(items) < 4:
             continue  # illegal cron expressions
-        tasks.append(Task(items))
+        tasks.append(Task(items, main))
     return tasks
 
 
@@ -108,7 +120,7 @@ class ScheduleThread(Thread):
         self.main = main
         self.debug = debug
         self._stop_event = Event()
-        self.tasks = parse_tasks(self.main.config['schedule'])
+        self.tasks = parse_tasks(self.main.config['schedule'], self.main)
         if self.debug:
             print(self.main.config['schedule'])
             now = datetime.now()
