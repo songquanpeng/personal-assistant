@@ -1,3 +1,5 @@
 pyqt5~=5.15.4
 pyautogui~=0.9.53
+Pillow~=9.0.1
+pyinstaller~=5.2
 requests~=2.24.0
