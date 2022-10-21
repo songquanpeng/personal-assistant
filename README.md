@@ -19,6 +19,8 @@
 ## 功能
 1. 休息提醒，包含多种提醒方式。
 2. 定时任务，定时执行各种命令。
+   1. 内置命令 `@tray` 可用于定时发送系统消息。
+   2. 内置命令 `@msg` 可用于定时通过 [Message Pusher](https://github.com/songquanpeng/message-pusher) 发送消息（需要在`其他设置`页面配置好 Message Pusher 的服务地址和 token）。
 3. 周期待办，自动添加待办事项。
 
 ## 截图展示
