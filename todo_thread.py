@@ -37,7 +37,7 @@ class TodoThread(Thread):
             items = todo_str.split(' ')
             if len(items) < 2:
                 continue  # illegal expression
-            if items[0] == '*' or items[0] == str(today):
+            if items[0] == '*' or str(today) in items[0]:
                 todos.append(' '.join(items[1:]))
         if len(todos) == 0:
             return
