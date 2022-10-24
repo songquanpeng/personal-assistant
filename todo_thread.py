@@ -1,17 +1,18 @@
 import os
 import subprocess
 import time
-import pyperclip
 from datetime import datetime, timedelta
 from threading import Thread, Event
 
 import pyautogui
+import pyperclip
 
 is_windows = os.name == "nt"
 use_shell = is_windows
 windows_start_microsoft_todo_cmd = r"explorer.exe shell:appsFolder\Microsoft.Todos_8wekyb3d8bbwe!App"
 
 target_hour = 3
+
 
 class TodoThread(Thread):
     def __init__(self, main, debug=False):
