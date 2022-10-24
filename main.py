@@ -10,7 +10,7 @@ from rest_thread import RestThread
 from schedule_thread import ScheduleThread
 from ui import Ui_MainWindow
 
-config_file = "personal-assistant.ini"
+config_file = os.path.join(os.path.dirname(sys.argv[0]), "personal-assistant.ini")
 is_windows = os.name == "nt"
 use_shell = is_windows
 hide_when_start = False
