@@ -8,6 +8,7 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QSystemTrayIcon, QMenu, Q
 from config import Config
 from rest_thread import RestThread
 from schedule_thread import ScheduleThread
+from todo_thread import TodoThread
 from ui import Ui_MainWindow
 
 config_file = os.path.join(os.path.dirname(sys.argv[0]), "personal-assistant.ini")
@@ -125,10 +126,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.update_rest_progress_signal.connect(self.restProgressBar.setValue)
         self.tray_message_signal.connect(self.show_tray_message)
         # threads
-        self.rest_thread = None
         self.schedule_thread = ScheduleThread(self, self.debug)
         self.schedule_thread.setDaemon(True)
         self.schedule_thread.start()
+        self.todo_thread = TodoThread(self, self.debug)
+        self.todo_thread.setDaemon(True)
+        self.todo_thread.start()
+        self.rest_thread = None
         if start_rest_remind:
             self.on_restStartBtn_clicked()
 
@@ -204,6 +208,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         value = self.todoTextEdit.toPlainText()
         self.config['todo'] = value
         self.statusbar.showMessage("配置已保存")
+        self.todo_thread.stop()
+        self.todo_thread = TodoThread(self, self.debug)
+        self.todo_thread.setDaemon(True)
+        self.todo_thread.start()
 
 
 if __name__ == "__main__":
