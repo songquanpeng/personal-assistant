@@ -420,9 +420,29 @@ font-family: &quot;Consolas&quot;, &quot;Microsoft YaHei&quot;;</string>
                 </property>
                </widget>
               </item>
+              <item>
+               <widget class="QCheckBox" name="beginStartCheckBox">
+                <property name="text">
+                 <string>启动时自动开始休息提醒</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_7">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>118</width>
+                  <height>25</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
              </layout>
             </item>
-            <item row="1" column="0" colspan="2">
+            <item row="1" column="0">
              <layout class="QHBoxLayout" name="horizontalLayout_7">
               <item>
                <widget class="QPushButton" name="updateBtn">
@@ -446,7 +466,7 @@ font-family: &quot;Consolas&quot;, &quot;Microsoft YaHei&quot;;</string>
               </item>
              </layout>
             </item>
-            <item row="2" column="1">
+            <item row="2" column="0">
              <spacer name="verticalSpacer">
               <property name="orientation">
                <enum>Qt::Vertical</enum>

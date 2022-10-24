@@ -104,6 +104,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 global hide_when_start
                 hide_when_start = True
         self.hideStartCheckBox.stateChanged.connect(lambda v: self.update_config("hideStart", str(v)))
+        start_rest_remind = False
+        if 'beginStart' in self.config:
+            self.beginStartCheckBox.setCheckState(int(self.config['beginStart']))
+            if self.config['beginStart'] == '2':
+                start_rest_remind = True
+        self.beginStartCheckBox.stateChanged.connect(lambda v: self.update_config("beginStart", str(v)))
         if is_windows:
             self.settings = QSettings(RUN_PATH, QSettings.NativeFormat)
 
@@ -123,6 +129,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.schedule_thread = ScheduleThread(self, self.debug)
         self.schedule_thread.setDaemon(True)
         self.schedule_thread.start()
+        if start_rest_remind:
+            self.on_restStartBtn_clicked()
 
     def closeEvent(self, event):
         self.hide()
