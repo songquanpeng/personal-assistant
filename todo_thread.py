@@ -57,7 +57,7 @@ class TodoThread(Thread):
         todo_app.maximize()
         time.sleep(1)
         screen_size = pyautogui.size()
-        pyautogui.click(screen_size[0] // 2, screen_size[1] // 5)
+        pyautogui.click(screen_size[0] // 2, 4 * screen_size[1] // 5)
         time.sleep(1)
         for todo in todos:
             print(f"adding todo: {todo}")
@@ -65,7 +65,8 @@ class TodoThread(Thread):
             pyautogui.hotkey("ctrl", "v")
             pyautogui.press("enter")
             time.sleep(1)
-        todo_app.minimize()
+        todo_app.restore()
+        time.sleep(1)
         todo_app.close()
 
     def run(self):
