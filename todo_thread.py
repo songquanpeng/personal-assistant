@@ -53,18 +53,25 @@ class TodoThread(Thread):
             return
         todo_app = pyautogui.getWindowsWithTitle("Microsoft To Do")[0]
         todo_app.activate()
+        time.sleep(1)
+        todo_app.maximize()
+        time.sleep(1)
+        screen_size = pyautogui.size()
+        pyautogui.click(screen_size[0] // 2, screen_size[1] // 5)
+        time.sleep(1)
         for todo in todos:
             print(f"adding todo: {todo}")
             pyperclip.copy(todo)
             pyautogui.hotkey("ctrl", "v")
             pyautogui.press("enter")
             time.sleep(1)
+        todo_app.minimize()
         todo_app.close()
 
     def run(self):
         while not self.should_stop():
             now = datetime.now()
-            if abs(now.hour - target_hour) <= 1:
+            if abs(now.hour - target_hour) <= 1 or self.debug:
                 self.add_todos()
             # prepare next run
             hours_delta = target_hour - now.hour
