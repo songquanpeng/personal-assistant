@@ -101,7 +101,12 @@ class Task:
             if self.message_pusher_url:
                 requests.get(f"{self.message_pusher_url}/?title={'个人助理'}&description={' '.join(self.items[4:])}&token={self.message_pusher_token}", verify=False)
         else:
-            subprocess.Popen(self.command.split(' '), shell=use_shell, cwd="./")
+            now = datetime.now()
+            cur_day = now.day
+            cur_weekday = now.weekday()
+            command = self.command.replace("$day", str(cur_day))
+            command = command.replace("$weekday", str(cur_weekday))
+            subprocess.Popen(command.split(' '), shell=use_shell, cwd="./")
         print(f'[{datetime.now()}]: command \"{self.command}\" executed')
 
 
@@ -133,6 +138,7 @@ class ScheduleThread(Thread):
             print(now)
             for t in self.tasks:
                 print(t.get_next_time(), " ", t.get_next_minutes())
+                t.execute()
 
     def run(self):
         if len(self.tasks) == 0:
