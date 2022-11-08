@@ -129,9 +129,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.schedule_thread = ScheduleThread(self, self.debug)
         self.schedule_thread.setDaemon(True)
         self.schedule_thread.start()
-        self.todo_thread = TodoThread(self, self.debug)
-        self.todo_thread.setDaemon(True)
-        self.todo_thread.start()
+        # TODO: todo_thread
+        # self.todo_thread = TodoThread(self, self.debug)
+        # self.todo_thread.setDaemon(True)
+        # self.todo_thread.start()
         self.rest_thread = None
         if start_rest_remind:
             self.on_restStartBtn_clicked()
@@ -208,10 +209,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         value = self.todoTextEdit.toPlainText()
         self.config['todo'] = value
         self.statusbar.showMessage("配置已保存")
-        self.todo_thread.stop()
-        self.todo_thread = TodoThread(self, self.debug)
-        self.todo_thread.setDaemon(True)
-        self.todo_thread.start()
+        # TODO: todo_thread
+        # self.todo_thread.stop()
+        # self.todo_thread = TodoThread(self, self.debug)
+        # self.todo_thread.setDaemon(True)
+        # self.todo_thread.start()
 
 
 if __name__ == "__main__":
