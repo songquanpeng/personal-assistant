@@ -153,11 +153,6 @@
             </item>
             <item>
              <property name="text">
-              <string>全屏覆盖</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
               <string>显示桌面</string>
              </property>
             </item>
@@ -282,7 +277,7 @@
 font-family: &quot;Consolas&quot;, &quot;Microsoft YaHei&quot;;</string>
           </property>
           <property name="plainText">
-           <string># 语法：day hour minute command
+           <string># 语法：weekday hour minute command
 </string>
           </property>
          </widget>
@@ -340,7 +335,7 @@ font-family: &quot;Consolas&quot;, &quot;Microsoft YaHei&quot;;</string>
 font-family: &quot;Consolas&quot;, &quot;Microsoft YaHei&quot;;</string>
           </property>
           <property name="plainText">
-           <string># 语法：* TODO 内容
+           <string># 语法：weekday TODO
 </string>
           </property>
          </widget>

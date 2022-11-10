@@ -80,7 +80,6 @@ class Ui_MainWindow(object):
         self.methodComboBox.addItem("")
         self.methodComboBox.addItem("")
         self.methodComboBox.addItem("")
-        self.methodComboBox.addItem("")
         self.horizontalLayout_2.addWidget(self.methodComboBox)
         spacerItem1 = QtWidgets.QSpacerItem(168, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem1)
@@ -302,18 +301,17 @@ class Ui_MainWindow(object):
         self.label_3.setText(_translate("MainWindow", "提醒方式："))
         self.methodComboBox.setItemText(0, _translate("MainWindow", "消息提醒"))
         self.methodComboBox.setItemText(1, _translate("MainWindow", "弹窗提醒"))
-        self.methodComboBox.setItemText(2, _translate("MainWindow", "全屏覆盖"))
-        self.methodComboBox.setItemText(3, _translate("MainWindow", "显示桌面"))
+        self.methodComboBox.setItemText(2, _translate("MainWindow", "显示桌面"))
         self.label_4.setText(_translate("MainWindow", "工作进度条："))
         self.label_5.setText(_translate("MainWindow", "休息进度条："))
         self.restStopBtn.setText(_translate("MainWindow", "终止"))
         self.restStartBtn.setText(_translate("MainWindow", "开始"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.restTab), _translate("MainWindow", "休息提醒"))
-        self.scheduleTextEdit.setPlainText(_translate("MainWindow", "# 语法：day hour minute command\n"
+        self.scheduleTextEdit.setPlainText(_translate("MainWindow", "# 语法：weekday hour minute command\n"
 ""))
         self.scheduleSaveBtn.setText(_translate("MainWindow", "保存"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.scheduleTab), _translate("MainWindow", "定时任务"))
-        self.todoTextEdit.setPlainText(_translate("MainWindow", "# 语法：* TODO 内容\n"
+        self.todoTextEdit.setPlainText(_translate("MainWindow", "# 语法：weekday TODO\n"
 ""))
         self.todoSaveBtn.setText(_translate("MainWindow", "保存"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.todoTab), _translate("MainWindow", "周期待办"))
