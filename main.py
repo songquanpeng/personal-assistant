@@ -1,6 +1,6 @@
 import os
 import sys
-
+from datetime import datetime
 from PyQt5.QtCore import pyqtSlot, Qt, pyqtSignal, QSettings
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QApplication, QMainWindow, QSystemTrayIcon, QMenu, QMessageBox
@@ -199,7 +199,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def on_scheduleSaveBtn_clicked(self):
         value = self.scheduleTextEdit.toPlainText()
         self.config['schedule'] = value
-        self.statusbar.showMessage("配置已保存")
+        current_time = datetime.now().strftime("%H:%M:%S")
+        self.statusbar.showMessage(f"配置已保存（{current_time}）")
         self.schedule_thread.stop()
         self.schedule_thread = ScheduleThread(self, self.debug)
         self.schedule_thread.setDaemon(True)
@@ -209,7 +210,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def on_todoSaveBtn_clicked(self):
         value = self.todoTextEdit.toPlainText()
         self.config['todo'] = value
-        self.statusbar.showMessage("配置已保存")
+        current_time = datetime.now().strftime("%H:%M:%S")
+        self.statusbar.showMessage(f"配置已保存（{current_time}）")
         # TODO: todo_thread
         # self.todo_thread.stop()
         # self.todo_thread = TodoThread(self, self.debug)
