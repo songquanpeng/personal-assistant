@@ -1,6 +1,7 @@
 import os
 import sys
 from datetime import datetime
+
 from PyQt5.QtCore import pyqtSlot, Qt, pyqtSignal, QSettings
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QApplication, QMainWindow, QSystemTrayIcon, QMenu, QMessageBox
@@ -8,10 +9,9 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QSystemTrayIcon, QMenu, Q
 from config import Config
 from rest_thread import RestThread
 from schedule_thread import ScheduleThread
-from todo_thread import TodoThread
 from ui import Ui_MainWindow
 
-config_file = os.path.join(os.path.dirname(sys.argv[0]), "personal-assistant.ini")
+config_file = os.path.join(os.path.dirname(sys.argv[0]), "personal-assistant.json")
 is_windows = os.name == "nt"
 use_shell = is_windows
 hide_when_start = False
