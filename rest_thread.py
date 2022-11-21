@@ -1,9 +1,12 @@
+import ctypes
 import math
 import os
 import time
 from threading import Thread, Event
 
 import pyautogui
+
+is_windows = os.name == "nt"
 
 
 class RestThread(Thread):
@@ -29,11 +32,16 @@ class RestThread(Thread):
             self.main.tray_message_signal.emit("个人助理", message)
         elif self.method == "弹窗提醒":
             self.main.notify_message_box_signal.emit(message)
-        elif self.method == "全屏覆盖":
-            # TODO: 全屏覆盖
-            pass
         elif self.method == "显示桌面":
             pyautogui.hotkey('win', 'd')
+        elif self.method == "强制锁屏":
+            if self.working:
+                self.main.tray_message_signal.emit("个人助理", message)
+            else:
+                if is_windows:
+                    ctypes.windll.user32.LockWorkStation()
+                else:
+                    self.main.tray_message_signal.emit("个人助理", message)
 
     def run(self):
         while not self.should_stop():

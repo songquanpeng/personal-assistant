@@ -58,7 +58,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         else:
             self.config['restInterval'] = '60'
         self.restSpinBox.textChanged.connect(lambda v: self.update_config("restInterval", v))
-        self.remind_methods = ['消息提醒', '弹窗提醒', '显示桌面']
+        self.remind_methods = ['消息提醒', '弹窗提醒', '显示桌面', '强制锁屏']
         if 'remindMethod' in self.config:
             remind_method = self.config['remindMethod']
             if remind_method in self.remind_methods:

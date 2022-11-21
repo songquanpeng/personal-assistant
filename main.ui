@@ -156,6 +156,11 @@
               <string>显示桌面</string>
              </property>
             </item>
+            <item>
+             <property name="text">
+              <string>强制锁屏</string>
+             </property>
+            </item>
            </widget>
           </item>
           <item>
