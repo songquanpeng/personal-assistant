@@ -53,6 +53,7 @@ class Task:
         self.next_minutes = self.get_next_minutes()
 
         self.message_pusher_url = None
+        self.title = self.main.config["titleText"]
         if self.main:
             self.message_pusher_url = self.main.config["messagePusherURL"]
 
@@ -94,11 +95,11 @@ class Task:
     def execute(self):
         if self.items[3] == '@tray':
             if self.main:
-                self.main.tray_message_signal.emit("个人助理", " ".join(self.items[4:]))
+                self.main.tray_message_signal.emit(" ".join(self.items[4:]))
         elif self.items[3] == '@msg':
             if self.message_pusher_url:
                 url = self.message_pusher_url
-                url = url.replace('$title', "个人助理")
+                url = url.replace('$title', self.title)
                 url = url.replace('$description', ' '.join(self.items[4:]))
                 requests.get(url, verify=False)
         else:

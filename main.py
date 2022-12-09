@@ -21,7 +21,7 @@ RUN_PATH = "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run
 
 class MainWindow(QMainWindow, Ui_MainWindow):
     notify_message_box_signal = pyqtSignal(str)
-    tray_message_signal = pyqtSignal(str, str)
+    tray_message_signal = pyqtSignal(str)
     update_work_progress_signal = pyqtSignal(int)
     update_rest_progress_signal = pyqtSignal(int)
 
@@ -94,6 +94,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         else:
             self.config['remindRestText'] = self.restTextLineEdit.text()
         self.restTextLineEdit.textChanged.connect(lambda v: self.update_config("remindRestText", v))
+        if 'titleText' in self.config:
+            self.titleTextLineEdit.setText(self.config['titleText'])
+        else:
+            self.config['titleText'] = self.titleTextLineEdit.text()
+        self.titleTextLineEdit.textChanged.connect(lambda v: self.update_config("titleText", v))
+        self.setWindowTitle(self.config['titleText'])
         if 'bootStart' in self.config:
             self.bootStartCheckBox.setCheckState(int(self.config['bootStart']))
         self.bootStartCheckBox.stateChanged.connect(lambda v: self.update_config("bootStart", str(v)))
@@ -158,8 +164,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.notify_message_box.setText(msg)
         self.notify_message_box.show()
 
-    def show_tray_message(self, title, msg):
-        self.tray.showMessage(title, msg)
+    def show_tray_message(self, msg):
+        self.tray.showMessage(self.config['titleText'], msg)
 
     @pyqtSlot()
     def on_restStartBtn_clicked(self):

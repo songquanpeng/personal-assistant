@@ -398,7 +398,7 @@ font-family: &quot;Consolas&quot;, &quot;Microsoft YaHei&quot;;</string>
         <item row="0" column="0">
          <widget class="QTabWidget" name="tabWidget_2">
           <property name="currentIndex">
-           <number>2</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="tab">
            <attribute name="title">
@@ -486,50 +486,65 @@ font-family: &quot;Consolas&quot;, &quot;Microsoft YaHei&quot;;</string>
            <attribute name="title">
             <string>个性化</string>
            </attribute>
-           <layout class="QGridLayout" name="gridLayout_7">
+           <layout class="QFormLayout" name="formLayout">
             <item row="0" column="0">
-             <layout class="QHBoxLayout" name="horizontalLayout_14">
-              <item>
-               <widget class="QLabel" name="label_14">
-                <property name="text">
-                 <string>提醒开始工作文案：</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="workTextLineEdit">
-                <property name="text">
-                 <string>开始工作！</string>
-                </property>
-                <property name="echoMode">
-                 <enum>QLineEdit::Normal</enum>
-                </property>
-               </widget>
-              </item>
-             </layout>
+             <widget class="QLabel" name="label_16">
+              <property name="minimumSize">
+               <size>
+                <width>45</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>标题文案：</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLineEdit" name="titleTextLineEdit">
+              <property name="text">
+               <string>个人助理</string>
+              </property>
+              <property name="echoMode">
+               <enum>QLineEdit::Normal</enum>
+              </property>
+             </widget>
             </item>
             <item row="1" column="0">
-             <layout class="QHBoxLayout" name="horizontalLayout_15">
-              <item>
-               <widget class="QLabel" name="label_15">
-                <property name="text">
-                 <string>提醒开始休息文案：</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="restTextLineEdit">
-                <property name="text">
-                 <string>开始休息！</string>
-                </property>
-                <property name="echoMode">
-                 <enum>QLineEdit::Normal</enum>
-                </property>
-               </widget>
-              </item>
-             </layout>
+             <widget class="QLabel" name="label_14">
+              <property name="text">
+               <string>提醒开始工作文案：</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLineEdit" name="workTextLineEdit">
+              <property name="text">
+               <string>开始工作！</string>
+              </property>
+              <property name="echoMode">
+               <enum>QLineEdit::Normal</enum>
+              </property>
+             </widget>
             </item>
             <item row="2" column="0">
+             <widget class="QLabel" name="label_15">
+              <property name="text">
+               <string>提醒开始休息文案：</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QLineEdit" name="restTextLineEdit">
+              <property name="text">
+               <string>开始休息！</string>
+              </property>
+              <property name="echoMode">
+               <enum>QLineEdit::Normal</enum>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0">
              <spacer name="verticalSpacer_4">
               <property name="orientation">
                <enum>Qt::Vertical</enum>
@@ -548,72 +563,60 @@ font-family: &quot;Consolas&quot;, &quot;Microsoft YaHei&quot;;</string>
            <attribute name="title">
             <string>外部服务</string>
            </attribute>
-           <layout class="QGridLayout" name="gridLayout_6">
+           <layout class="QFormLayout" name="formLayout_2">
             <item row="0" column="0">
-             <layout class="QHBoxLayout" name="horizontalLayout_10">
-              <item>
-               <widget class="QLabel" name="label_10">
-                <property name="text">
-                 <string>microblog 服务地址：</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="microblogServerLineEdit">
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="echoMode">
-                 <enum>QLineEdit::Normal</enum>
-                </property>
-               </widget>
-              </item>
-             </layout>
+             <widget class="QLabel" name="label_10">
+              <property name="text">
+               <string>microblog 服务地址：</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLineEdit" name="microblogServerLineEdit">
+              <property name="text">
+               <string/>
+              </property>
+              <property name="echoMode">
+               <enum>QLineEdit::Normal</enum>
+              </property>
+             </widget>
             </item>
             <item row="1" column="0">
-             <layout class="QHBoxLayout" name="horizontalLayout_11">
-              <item>
-               <widget class="QLabel" name="label_11">
-                <property name="text">
-                 <string>microblog 访问凭证：</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="microblogTokenLineEdit">
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="echoMode">
-                 <enum>QLineEdit::Password</enum>
-                </property>
-               </widget>
-              </item>
-             </layout>
+             <widget class="QLabel" name="label_11">
+              <property name="text">
+               <string>microblog 访问凭证：</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLineEdit" name="microblogTokenLineEdit">
+              <property name="text">
+               <string/>
+              </property>
+              <property name="echoMode">
+               <enum>QLineEdit::Password</enum>
+              </property>
+             </widget>
             </item>
             <item row="2" column="0">
-             <layout class="QHBoxLayout" name="horizontalLayout_12">
-              <item>
-               <widget class="QLabel" name="label_12">
-                <property name="text">
-                 <string>消息推送 API 端口：</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="messagePusherURLLineEdit">
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="echoMode">
-                 <enum>QLineEdit::Normal</enum>
-                </property>
-                <property name="placeholderText">
-                 <string>$title 和 $description 将会被替换为实际值</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
+             <widget class="QLabel" name="label_12">
+              <property name="text">
+               <string>消息推送 API 端口：</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QLineEdit" name="messagePusherURLLineEdit">
+              <property name="text">
+               <string/>
+              </property>
+              <property name="echoMode">
+               <enum>QLineEdit::Normal</enum>
+              </property>
+              <property name="placeholderText">
+               <string>$title 和 $description 将会被替换为实际值</string>
+              </property>
+             </widget>
             </item>
             <item row="3" column="0">
              <spacer name="verticalSpacer_3">
