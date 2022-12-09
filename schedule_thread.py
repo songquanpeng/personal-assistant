@@ -53,10 +53,8 @@ class Task:
         self.next_minutes = self.get_next_minutes()
 
         self.message_pusher_url = None
-        self.message_pusher_token = None
         if self.main:
             self.message_pusher_url = self.main.config["messagePusherURL"]
-            self.message_pusher_token = self.main.config["messagePusherToken"]
 
     def get_next_time(self):
         now = datetime.now()
@@ -99,7 +97,10 @@ class Task:
                 self.main.tray_message_signal.emit("个人助理", " ".join(self.items[4:]))
         elif self.items[3] == '@msg':
             if self.message_pusher_url:
-                requests.get(f"{self.message_pusher_url}/?title={'个人助理'}&description={' '.join(self.items[4:])}&token={self.message_pusher_token}", verify=False)
+                url = self.message_pusher_url
+                url = url.replace('$title', "个人助理")
+                url = url.replace('$description', ' '.join(self.items[4:]))
+                requests.get(url, verify=False)
         else:
             now = datetime.now()
             cur_day = now.day

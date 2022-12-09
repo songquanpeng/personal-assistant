@@ -80,9 +80,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if 'messagePusherURL' in self.config:
             self.messagePusherURLLineEdit.setText(self.config['messagePusherURL'])
         self.messagePusherURLLineEdit.textChanged.connect(lambda v: self.update_config("messagePusherURL", v))
-        if 'messagePusherToken' in self.config:
-            self.messagePusherTokenLineEdit.setText(self.config['messagePusherToken'])
-        self.messagePusherTokenLineEdit.textChanged.connect(lambda v: self.update_config("messagePusherToken", v))
         if 'schedule' in self.config:
             self.scheduleTextEdit.setPlainText(self.config['schedule'])
         if 'todo' in self.config:
