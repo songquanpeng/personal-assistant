@@ -10,6 +10,7 @@ from config import Config
 from rest_thread import RestThread
 from schedule_thread import ScheduleThread
 from ui import Ui_MainWindow
+from websocket_thread import WebSocketThread
 
 config_file = os.path.join(os.path.dirname(sys.argv[0]), "personal-assistant.json")
 is_windows = os.name == "nt"
@@ -21,7 +22,7 @@ RUN_PATH = "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run
 
 class MainWindow(QMainWindow, Ui_MainWindow):
     notify_message_box_signal = pyqtSignal(str)
-    tray_message_signal = pyqtSignal(str)
+    tray_message_signal = pyqtSignal(str, str)
     update_work_progress_signal = pyqtSignal(int)
     update_rest_progress_signal = pyqtSignal(int)
 
@@ -100,6 +101,28 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.config['titleText'] = self.titleTextLineEdit.text()
         self.titleTextLineEdit.textChanged.connect(lambda v: self.update_config("titleText", v))
         self.setWindowTitle(self.config['titleText'])
+        if 'messagePusherServerAddress' in self.config:
+            self.messagePusherServerAddressLineEdit.setText(self.config['messagePusherServerAddress'])
+        else:
+            self.config['messagePusherServerAddress'] = self.messagePusherServerAddressLineEdit.text()
+        self.messagePusherServerAddressLineEdit.textChanged.connect(lambda v: self.update_config("messagePusherServerAddress", v))
+        if 'messagePusherClientToken' in self.config:
+            self.messagePusherClientTokenLineEdit.setText(self.config['messagePusherClientToken'])
+        else:
+            self.config['messagePusherClientToken'] = self.messagePusherClientTokenLineEdit.text()
+        self.messagePusherClientTokenLineEdit.textChanged.connect(lambda v: self.update_config("messagePusherClientToken", v))
+        if 'messagePusherUsername' in self.config:
+            self.messagePusherUsernameLineEdit.setText(self.config['messagePusherUsername'])
+        else:
+            self.config['messagePusherUsername'] = self.messagePusherUsernameLineEdit.text()
+        self.messagePusherUsernameLineEdit.textChanged.connect(lambda v: self.update_config("messagePusherUsername", v))
+        if 'messagePusher' in self.config:
+            self.messagePusherCheckBox.setCheckState(int(self.config['messagePusher']))
+        self.messagePusherCheckBox.stateChanged.connect(lambda v: self.update_config("messagePusher", str(v)))
+        if self.messagePusherCheckBox.isChecked():
+            self.websocket_thread = WebSocketThread(self, self.debug)
+            self.websocket_thread.setDaemon(True)
+            self.websocket_thread.start()
         if 'bootStart' in self.config:
             self.bootStartCheckBox.setCheckState(int(self.config['bootStart']))
         self.bootStartCheckBox.stateChanged.connect(lambda v: self.update_config("bootStart", str(v)))
@@ -159,13 +182,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     self.settings.remove("PersonalAssistant")
             else:
                 self.statusbar.showMessage("开机启动选项仅支持 Windows 系统")
+        elif key == "messagePusher":
+            pass
 
     def show_notify_message_box(self, msg):
         self.notify_message_box.setText(msg)
         self.notify_message_box.show()
 
-    def show_tray_message(self, msg):
-        self.tray.showMessage(self.config['titleText'], msg)
+    def show_tray_message(self, title, msg):
+        self.tray.showMessage(title, msg)
 
     @pyqtSlot()
     def on_restStartBtn_clicked(self):

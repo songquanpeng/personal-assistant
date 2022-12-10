@@ -33,7 +33,8 @@
       4. `* 9,13,17 0 @msg 记得滴眼药水~`：每天三个时间点提醒滴眼药水；
       5. `* 3,12,18 0 scp username@ip:path/to/file ./day-$day.db`：每天三个时间点自动备份数据到本地。
 3. 周期待办，自动添加 Microsoft To Do 待办事项（功能尚未就绪）。
-4. 应用可以设置开机启动，并启动时自动打开休息提醒。
+4. 本应用可作为 [Message Pusher](https://github.com/songquanpeng/message-pusher) 的桌面推送客户端使用，请在 `其他设置` -> `消息推送服务` 进行配置，之后重启应用即可。
+5. 应用可以设置开机启动，并启动时自动打开休息提醒。
 
 ## 截图展示
 ![demo](demo.png)

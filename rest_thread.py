@@ -24,24 +24,25 @@ class RestThread(Thread):
         self.remind_work_text = self.main.config['remindWorkText']
         self.remind_rest_text = self.main.config['remindRestText']
         self.seconds_per_minute = 60
+        self.title = self.main.config["titleText"]
         if debug:
             self.seconds_per_minute = 1
 
     def remind_user(self, message):
         if self.method == "消息提醒":
-            self.main.tray_message_signal.emit(message)
+            self.main.tray_message_signal.emit(self.title, message)
         elif self.method == "弹窗提醒":
             self.main.notify_message_box_signal.emit(message)
         elif self.method == "显示桌面":
             pyautogui.hotkey('win', 'd')
         elif self.method == "强制锁屏":
             if self.working:
-                self.main.tray_message_signal.emit(message)
+                self.main.tray_message_signal.emit(self.title, message)
             else:
                 if is_windows:
                     ctypes.windll.user32.LockWorkStation()
                 else:
-                    self.main.tray_message_signal.emit(message)
+                    self.main.tray_message_signal.emit(self.title, message)
 
     def run(self):
         while not self.should_stop():

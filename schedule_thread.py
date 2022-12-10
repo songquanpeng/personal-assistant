@@ -95,7 +95,7 @@ class Task:
     def execute(self):
         if self.items[3] == '@tray':
             if self.main:
-                self.main.tray_message_signal.emit(" ".join(self.items[4:]))
+                self.main.tray_message_signal.emit(self.title, " ".join(self.items[4:]))
         elif self.items[3] == '@msg':
             if self.message_pusher_url:
                 url = self.message_pusher_url
