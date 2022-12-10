@@ -21,7 +21,7 @@
 2. 定时任务，定时执行各种命令。
    1. 内置命令 `@tray` 可用于定时发送系统消息。
    2. 内置命令 `@msg` 可用于定时通过消息推送服务进行消息推送。
-      + 需要在`其他设置`页面配置好消息推送 API 端口。
+      + 需要在`其他设置` -> `外部服务` 页面（注意不是`消息推送服务页面`，是`外部服务`页面）配置好消息推送 API 端口。
       + 例如：`https://msgpusher.com/push/username?title=$title&description=$description`
       + 上述推送 API 端口中的 `$title` 和 `$description` 会在推送的时候替换为实际值，请根据你的实际情况构造该 URL。
       + 推荐使用：[Message Pusher](https://github.com/songquanpeng/message-pusher) 发送消息。
