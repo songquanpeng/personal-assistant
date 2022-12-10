@@ -19,6 +19,7 @@ jobs:
           architecture: 'x64'
       - name: Build
         run: |
+          sed -i "" "s/v0.0.0/$(git describe --tags)/g" ./main.py
           pip install -r requirements.txt
           pyinstaller --noconsole -F ./main.py --icon icon.png -n personal-assistant-macos
       - name: Release

@@ -10,12 +10,14 @@ from config import Config
 from rest_thread import RestThread
 from schedule_thread import ScheduleThread
 from ui import Ui_MainWindow
+from utils import get_latest_version
 from websocket_thread import WebSocketThread
 
 config_file = os.path.join(os.path.dirname(sys.argv[0]), "personal-assistant.json")
 is_windows = os.name == "nt"
 use_shell = is_windows
 hide_when_start = False
+version = "v0.0.0"
 
 RUN_PATH = "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run"
 
@@ -105,12 +107,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.messagePusherServerAddressLineEdit.setText(self.config['messagePusherServerAddress'])
         else:
             self.config['messagePusherServerAddress'] = self.messagePusherServerAddressLineEdit.text()
-        self.messagePusherServerAddressLineEdit.textChanged.connect(lambda v: self.update_config("messagePusherServerAddress", v))
+        self.messagePusherServerAddressLineEdit.textChanged.connect(
+            lambda v: self.update_config("messagePusherServerAddress", v))
         if 'messagePusherClientToken' in self.config:
             self.messagePusherClientTokenLineEdit.setText(self.config['messagePusherClientToken'])
         else:
             self.config['messagePusherClientToken'] = self.messagePusherClientTokenLineEdit.text()
-        self.messagePusherClientTokenLineEdit.textChanged.connect(lambda v: self.update_config("messagePusherClientToken", v))
+        self.messagePusherClientTokenLineEdit.textChanged.connect(
+            lambda v: self.update_config("messagePusherClientToken", v))
         if 'messagePusherUsername' in self.config:
             self.messagePusherUsernameLineEdit.setText(self.config['messagePusherUsername'])
         else:
@@ -245,6 +249,19 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # self.todo_thread = TodoThread(self, self.debug)
         # self.todo_thread.setDaemon(True)
         # self.todo_thread.start()
+
+    @pyqtSlot()
+    def on_updateBtn_clicked(self):
+        self.updateBtn.setDisabled(True)
+        self.statusbar.showMessage(f"正在从 GitHub 获取信息 ...")
+        latest_version = get_latest_version()
+        if latest_version is None:
+            self.statusbar.showMessage(f"无法连接至 GitHub 服务器")
+        elif latest_version != version:
+            self.statusbar.showMessage(f"更新可用：{version} -> {latest_version}")
+        else:
+            self.statusbar.showMessage(f"已是最新版：{latest_version}")
+        self.updateBtn.setEnabled(True)
 
 
 if __name__ == "__main__":
