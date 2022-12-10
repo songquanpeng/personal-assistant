@@ -43,7 +43,7 @@
 5. 应用可以设置开机启动，并启动时自动打开休息提醒。
 
 ## 截图展示
-![demo](demo.png)
+<img src="demo.png" alt="demo" width="810">
 
 ## 使用方法
 ### Windows 用户  
