@@ -34,7 +34,11 @@ class RestThread(Thread):
         elif self.method == "弹窗提醒":
             self.main.notify_message_box_signal.emit(message)
         elif self.method == "显示桌面":
-            pyautogui.hotkey('win', 'd')
+            try:
+                pyautogui.hotkey('win', 'd')
+            except Exception as e:
+                print(e)
+                self.main.statusbar.showMessage(str(e))
         elif self.method == "强制锁屏":
             if self.working:
                 self.main.tray_message_signal.emit(self.title, message)
