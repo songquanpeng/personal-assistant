@@ -144,6 +144,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.settings = QSettings(RUN_PATH, QSettings.NativeFormat)
 
         self.notify_message_box = QMessageBox()
+        self.notify_message_box.setModal(False)
         self.notify_message_box.setFont(self.centralwidget.font())
         self.notify_message_box.setWindowIcon(QIcon(":/icon.png"))
         self.notify_message_box.setIcon(QMessageBox.Information)
@@ -248,6 +249,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
+    app.setQuitOnLastWindowClosed(False)
     Dialog = MainWindow()
     if not hide_when_start:
         Dialog.show()
