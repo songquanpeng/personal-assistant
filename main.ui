@@ -313,68 +313,6 @@ font-family: &quot;Consolas&quot;, &quot;Microsoft YaHei&quot;;</string>
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="todoTab">
-       <attribute name="title">
-        <string>周期待办</string>
-       </attribute>
-       <layout class="QGridLayout" name="gridLayout_4">
-        <property name="leftMargin">
-         <number>0</number>
-        </property>
-        <property name="topMargin">
-         <number>0</number>
-        </property>
-        <property name="rightMargin">
-         <number>0</number>
-        </property>
-        <property name="bottomMargin">
-         <number>0</number>
-        </property>
-        <property name="spacing">
-         <number>0</number>
-        </property>
-        <item row="0" column="0">
-         <widget class="QPlainTextEdit" name="todoTextEdit">
-          <property name="styleSheet">
-           <string notr="true">font-size: 11pt;
-font-family: &quot;Consolas&quot;, &quot;Microsoft YaHei&quot;;</string>
-          </property>
-          <property name="plainText">
-           <string># 语法：weekday TODO
-# 暂不可用，敬请期待
-</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="0">
-         <layout class="QHBoxLayout" name="horizontalLayout_3">
-          <property name="spacing">
-           <number>0</number>
-          </property>
-          <item>
-           <spacer name="horizontalSpacer_3">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>428</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item>
-           <widget class="QPushButton" name="todoSaveBtn">
-            <property name="text">
-             <string>保存</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-       </layout>
-      </widget>
       <widget class="QWidget" name="otherTab">
        <attribute name="title">
         <string>其他设置</string>

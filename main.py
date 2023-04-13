@@ -85,8 +85,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.messagePusherURLLineEdit.textChanged.connect(lambda v: self.update_config("messagePusherURL", v))
         if 'schedule' in self.config:
             self.scheduleTextEdit.setPlainText(self.config['schedule'])
-        if 'todo' in self.config:
-            self.todoTextEdit.setPlainText(self.config['todo'])
         if 'remindWorkText' in self.config:
             self.workTextLineEdit.setText(self.config['remindWorkText'])
         else:
@@ -160,10 +158,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.schedule_thread = ScheduleThread(self, self.debug)
         self.schedule_thread.setDaemon(True)
         self.schedule_thread.start()
-        # TODO: todo_thread
-        # self.todo_thread = TodoThread(self, self.debug)
-        # self.todo_thread.setDaemon(True)
-        # self.todo_thread.start()
         self.rest_thread = None
         if start_rest_remind:
             self.on_restStartBtn_clicked()
@@ -237,18 +231,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.schedule_thread = ScheduleThread(self, self.debug)
         self.schedule_thread.setDaemon(True)
         self.schedule_thread.start()
-
-    @pyqtSlot()
-    def on_todoSaveBtn_clicked(self):
-        value = self.todoTextEdit.toPlainText()
-        self.config['todo'] = value
-        current_time = datetime.now().strftime("%H:%M:%S")
-        self.statusbar.showMessage(f"配置已保存（{current_time}）")
-        # TODO: todo_thread
-        # self.todo_thread.stop()
-        # self.todo_thread = TodoThread(self, self.debug)
-        # self.todo_thread.setDaemon(True)
-        # self.todo_thread.start()
 
     @pyqtSlot()
     def on_updateBtn_clicked(self):
