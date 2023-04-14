@@ -145,6 +145,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         self.notify_message_box = QMessageBox()
         self.notify_message_box.setModal(False)
+        self.notify_message_box.setAttribute(Qt.WA_ShowWithoutActivating)
         self.notify_message_box.setFont(self.centralwidget.font())
         self.notify_message_box.setWindowIcon(QIcon(":/icon.png"))
         self.notify_message_box.setIcon(QMessageBox.Information)
