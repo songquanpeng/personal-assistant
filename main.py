@@ -126,6 +126,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.websocket_thread = WebSocketThread(self, self.debug)
             self.websocket_thread.setDaemon(True)
             self.websocket_thread.start()
+        else:
+            self.tabWidget.removeTab(2)
         if 'bootStart' in self.config:
             self.bootStartCheckBox.setCheckState(int(self.config['bootStart']))
         self.bootStartCheckBox.stateChanged.connect(lambda v: self.update_config("bootStart", str(v)))
