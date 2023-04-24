@@ -1,4 +1,5 @@
 import asyncio
+import datetime
 import json
 import ssl
 from threading import Thread, Event
@@ -27,6 +28,11 @@ class WebSocketThread(Thread):
 
     def show_message(self, message):
         self.main.tray_message_signal.emit(message['title'], message['description'])
+        time_val = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        msgVal = time_val + '\n' + message['title'] + '\n' + message['description'] + '\n'
+        self.main.history_message_signal.emit(msgVal)
+        with open("messages.txt", "a", encoding='utf-8') as file:
+            file.write(msgVal + '\n')
 
     async def receive_message(self):
         try:
