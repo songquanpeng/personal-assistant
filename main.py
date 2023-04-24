@@ -25,6 +25,7 @@ RUN_PATH = "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run
 class MainWindow(QMainWindow, Ui_MainWindow):
     notify_message_box_signal = pyqtSignal(str)
     tray_message_signal = pyqtSignal(str, str)
+    history_message_signal = pyqtSignal(str)
     update_work_progress_signal = pyqtSignal(int)
     update_rest_progress_signal = pyqtSignal(int)
 
@@ -156,6 +157,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.update_work_progress_signal.connect(self.workProgressBar.setValue)
         self.update_rest_progress_signal.connect(self.restProgressBar.setValue)
         self.tray_message_signal.connect(self.show_tray_message)
+        self.history_message_signal.connect(self.show_history_message)
         # threads
         self.schedule_thread = ScheduleThread(self, self.debug)
         self.schedule_thread.setDaemon(True)
@@ -191,6 +193,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def show_tray_message(self, title, msg):
         self.tray.showMessage(title, msg)
+
+    def show_history_message(self, msgVal):
+        self.messageHistoryEdit.append(msgVal)
+
+    @pyqtSlot()
+    def on_msgClearBtn_clicked(self):
+        self.messageHistoryEdit.clear()
 
     @pyqtSlot()
     def on_restStartBtn_clicked(self):
