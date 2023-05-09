@@ -167,6 +167,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.rest_thread = None
         if start_rest_remind:
             self.on_restStartBtn_clicked()
+        desktop = QApplication.desktop()
+        self.screen_geometry = desktop.screenGeometry(desktop.primaryScreen())
 
     def closeEvent(self, event):
         self.hide()
@@ -191,6 +193,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def show_notify_message_box(self, msg):
         self.notify_message_box.setText(msg)
+        width, height = self.notify_message_box.width(), self.notify_message_box.height()
+        self.notify_message_box.move((self.screen_geometry.width() - width) // 2,
+                                     (self.screen_geometry.height() - height) // 2)
         self.notify_message_box.show()
 
     def show_tray_message(self, title, msg):
