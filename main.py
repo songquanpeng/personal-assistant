@@ -1,4 +1,5 @@
 import os
+import random
 import sys
 from datetime import datetime
 
@@ -20,6 +21,8 @@ hide_when_start = False
 version = "v0.0.0"
 
 RUN_PATH = "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run"
+
+random.seed(datetime.now())
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):

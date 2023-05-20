@@ -1,10 +1,13 @@
 import ctypes
 import math
 import os
+import random
 import time
 from threading import Thread, Event
 
 import pyautogui
+
+from sentences import rest_sentences, work_sentences
 
 is_windows = os.name == "nt"
 
@@ -66,7 +69,11 @@ class RestThread(Thread):
                 if self.count == self.work_interval:
                     self.working = False
                     self.count = 0
-                    self.remind_user(self.remind_rest_text)
+                    if self.remind_rest_text == "":
+                        prompt = random.choice(rest_sentences)
+                    else:
+                        prompt = self.remind_rest_text
+                    self.remind_user(prompt)
             else:
                 self.main.update_rest_progress_signal.emit(math.ceil(100 * self.count / self.rest_interval))
                 if self.count == self.rest_interval:
@@ -74,7 +81,11 @@ class RestThread(Thread):
                     self.count = 0
                     self.main.update_work_progress_signal.emit(0)
                     self.main.update_rest_progress_signal.emit(0)
-                    self.remind_user(self.remind_work_text)
+                    if self.remind_work_text == "":
+                        prompt = random.choice(work_sentences)
+                    else:
+                        prompt = self.remind_work_text
+                    self.remind_user(prompt)
 
     def stop(self):
         self._stop_event.set()
