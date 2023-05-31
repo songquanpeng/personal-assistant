@@ -22,7 +22,7 @@ version = "v0.0.0"
 
 RUN_PATH = "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run"
 
-random.seed(datetime.now())
+random.seed(str(datetime.now()))
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):
